@@ -3,6 +3,7 @@ import java.util.*;
 
 /**
  *     Overall running: ./vmsim –n <numframes> -a <opt|clock|aging|work> [-r <refresh>] [-t <tau>] <tracefile>
+ *     Simulates virtual memory algorithms Optimal, Clock, Aging, and Working Set
  */
 public class vmsim {
 
@@ -46,6 +47,7 @@ public class vmsim {
             }
         }
 
+		//Creates Page Table
         pageTable = new ArrayList<>();
         int maxPages = 1024*1024;
         for(int i=0;i<maxPages;i++){
@@ -93,6 +95,10 @@ public class vmsim {
 
     }
 
+	
+	/*
+	*	Optimal Page Replacement algorithm. Not realistic in terms of 
+	*/
     public static void opt(int numFrames){
 
         //Converts hex to decimal
@@ -100,6 +106,7 @@ public class vmsim {
             int pageNum = Integer.decode("0x" + hex.get(i).substring(0, 5));
             int currFrame = 0;
 
+			//Checks if the correct algorithm was chosen
             Page entry = pageTable.get(pageNum);
             entry.index = pageNum;
             entry.ref = true;
@@ -149,6 +156,10 @@ public class vmsim {
             memAccess++;
         }
     }
+	
+	/*
+	*	Clock algorithm
+	*/
     public static void clock(int numFrames){
 
         int clockLoc =0;
@@ -201,6 +212,10 @@ public class vmsim {
             memAccess++;
         }
     }
+	
+	/*
+	*	Aging algorithm for page replacement
+	*/
     public static void aging(int numFrames, int refresh){
         int currFrame = 0;
 
@@ -271,6 +286,10 @@ public class vmsim {
             memAccess++;
         }
     }
+	
+	/*
+	*	WOrking Set algorithm for page replacement
+	*/
     public static void work(int numFrames, int refresh, int tau){
         int currFrame = 0;
 

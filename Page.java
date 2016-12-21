@@ -1,5 +1,5 @@
 /**
- *
+ * Page class
  */
 public class Page {
     int index;
